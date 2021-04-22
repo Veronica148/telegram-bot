@@ -10,7 +10,9 @@ steps:
       - 'gcr.io/$PROJECT_ID/sonar-scanner:4.6.0.2311'
       - '.'
 
-    images: ['gcr.io/$PROJECT_ID/sonar-scanner:latest', 'gcr.io/$PROJECT_ID/sonar-scanner:4.6.0.2311']
+    images:
+    - 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+    - 'gcr.io/$PROJECT_ID/sonar-scanner:4.6.0.2311'
 
 
   - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
