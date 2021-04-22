@@ -2,10 +2,6 @@ steps:
   - name: "gcr.io/cloud-builders/mvn"
     args: ["clean", "integration-test", "-DtestSuite=testngUnitTests"]
     waitFor: ['-']
-#
-
-  #- name: "bash"
-    #args: ["allure serve allure-results"]
 
   - name: "gcr.io/cloud-builders/mvn"
     args: ["clean", "integration-test", "-DtestSuite=testng"]
