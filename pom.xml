@@ -103,6 +103,7 @@
 					<suiteXmlFiles>
 						<!--suppress UnresolvedMavenProperty -->
 						<suiteXmlFile>src/test/resources/${testSuite}.xml</suiteXmlFile>
+
 <!--						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>-->
 <!--						<suiteXmlFile>src/test/resources/testngUnitTests.xml</suiteXmlFile>-->
 					</suiteXmlFiles>
