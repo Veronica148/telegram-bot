@@ -115,8 +115,8 @@
 				<configuration>
 					<suiteXmlFiles>
 						<!--suppress UnresolvedMavenProperty -->
-<!--						<suiteXmlFile>src/test/resources/${testSuite}.xml</suiteXmlFile>-->
-						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+						<suiteXmlFile>src/test/resources/${testSuite}.xml</suiteXmlFile>
+<!--						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>-->
 <!--						<suiteXmlFile>src/test/resources/testngUnitTests.xml</suiteXmlFile>-->
 					</suiteXmlFiles>
 <!--					<argLine>-->
@@ -142,11 +142,6 @@
 					<encoding>${source.encoding}</encoding>
 				</configuration>
 			</plugin>
-<!--			<plugin>-->
-<!--				<groupId>org.sonarsource.scanner.maven</groupId>-->
-<!--				<artifactId>sonar-maven-plugin</artifactId>-->
-<!--				<version>3.7.0.1746</version>-->
-<!--			</plugin>-->
 		</plugins>
 	</build>
 
