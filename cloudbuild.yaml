@@ -1,25 +1,15 @@
 steps:
-#  - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
-#    args:
-#    - '-Dsonar.host.url=https://sonarcloud.io'
-#    - '-Dsonar.login=A586de9c49fc5523064ebbec71b5b92add1d2cce'
-#    - '-Dsonar.projectKey=SonarTelegramProject'
-#    - '-Dsonar.organization=veronica148'
-#    - '-Dsonar.sources=.'
-   # tags: ['cloud-builders-community']
-
-
-  #- name: "gcr.io/cloud-builders/mvn"
-   # args: ["clean", "integration-test", "-DtestSuite=testngUnitTests"]
-    #waitFor: ['-']
+  - name: "gcr.io/cloud-builders/mvn"
+    args: ["clean", "integration-test", "-DtestSuite=testngUnitTests"]
+    waitFor: ['-']
 #
 
   #- name: "bash"
     #args: ["allure serve allure-results"]
 
-  #- name: "gcr.io/cloud-builders/mvn"
-   # args: ["clean", "integration-test", "-DtestSuite=testng"]
-    #waitFor: ['-']
+  - name: "gcr.io/cloud-builders/mvn"
+    args: ["clean", "integration-test", "-DtestSuite=testng"]
+    waitFor: ['-']
 
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "app.standard.yaml"]
