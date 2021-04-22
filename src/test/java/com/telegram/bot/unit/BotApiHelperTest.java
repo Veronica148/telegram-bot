@@ -20,6 +20,7 @@ public class BotApiHelperTest extends AbstractTestNGSpringContextTests {
         String ourMessage = "someMess";
         String respMessage = botApiHelper.getResposeFromBot(ourMessage);
         Assert.assertEquals(respMessage, ourMessage.toUpperCase());
+        System.out.println("ggg");
     }
 
     @Test
