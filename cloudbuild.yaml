@@ -1,3 +1,6 @@
+substitutions:
+  _CLOUDSDK_COMPUTE_ZONE: us-central1-a
+  _CLOUDSDK_CONTAINER_CLUSTER: $_CLOUDSDK_CONTAINER_CLUSTER
 steps:
   - name: 'gcr.io/$PROJECT_ID/sonar-scanner'
     args:
