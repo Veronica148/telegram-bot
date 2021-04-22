@@ -6,7 +6,7 @@ steps:
       - '-Dsonar.projectKey=SonarTelegramProject'
       - '-Dsonar.organization=veronica148'
       - '-Dsonar.sources=.'
-    tags: ['cloud-builders-community']
+   # tags: ['cloud-builders-community']
 
 
   #- name: "gcr.io/cloud-builders/mvn"
