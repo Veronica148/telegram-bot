@@ -1,14 +1,25 @@
-substitutions:
-  _CLOUDSDK_COMPUTE_ZONE: us-central1-a
-  _CLOUDSDK_CONTAINER_CLUSTER: $_CLOUDSDK_CONTAINER_CLUSTER
 steps:
-  - name: 'gcr.io/$PROJECT_ID/sonar-scanner'
+  - name: 'gcr.io/cloud-builders/docker'
     args:
-      - '-Dsonar.host.url=https://sonarcloud.io'
-      - '-Dsonar.login=A586de9c49fc5523064ebbec71b5b92add1d2cce'
-      - '-Dsonar.projectKey=SonarTelegramProject'
-      - '-Dsonar.organization=veronica148'
-      - '-Dsonar.sources=.'
+      - 'build'
+      - '--build-arg'
+      - 'SONARQUBE_SCANNER_CLI_VERSION=4.6.0.2311'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/sonar-scanner:4.6.0.2311'
+      - '.'
+
+    images: ['gcr.io/$PROJECT_ID/sonar-scanner:latest', 'gcr.io/$PROJECT_ID/sonar-scanner:4.6.0.2311']
+
+
+  - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+    args:
+    - '-Dsonar.host.url=https://sonarcloud.io'
+    - '-Dsonar.login=A586de9c49fc5523064ebbec71b5b92add1d2cce'
+    - '-Dsonar.projectKey=SonarTelegramProject'
+    - '-Dsonar.organization=veronica148'
+    - '-Dsonar.sources=.'
    # tags: ['cloud-builders-community']
 
 
