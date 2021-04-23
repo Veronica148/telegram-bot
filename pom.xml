@@ -20,7 +20,7 @@
 		<sonar.projectKey>Veronica148_telegram-bot</sonar.projectKey>
 		<sonar.organization>veronica148</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<testSuite>alltests.xml</testSuite>
+		<testSuite>alltests</testSuite>
 	</properties>
 
 	<dependencies>
@@ -102,7 +102,7 @@
 				<configuration>
 					<suiteXmlFiles>
 						<!--suppress UnresolvedMavenProperty -->
-						<suiteXmlFile>src/test/resources/${testSuite}</suiteXmlFile>
+						<suiteXmlFile>src/test/resources/${testSuite}.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<argLine>-Xms512m -Xmx1024m</argLine>
 				</configuration>
