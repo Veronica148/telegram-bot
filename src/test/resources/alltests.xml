@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Test Suite" >
+<suite name="All Test Suite" >
     <listeners>
         <listener class-name="com.telegram.bot.base.TestListener"/>
         <listener class-name="com.telegram.bot.base.retry.AnnotationTransformer"/>
