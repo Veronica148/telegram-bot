@@ -2,13 +2,15 @@ package com.app.controllers;
 
 import com.app.helpers.TimeStampHelper;
 import com.app.model.BotMessage;
-import com.app.model.User;
 import com.app.services.BotMessageService;
 import com.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -35,7 +37,7 @@ public class JsonBotMessageController {
         HttpStatus status = OK;
         List<BotMessage> messages = null;
         try {
-            TimeStampHelper tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
+            var tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
             messages = service.getAllBotMessages().stream()
                     .filter(x -> x.getDate().after(tsHelper.getStartDate()) && x.getDate().before(tsHelper.getEndDate()))
                     .collect(toList());
@@ -57,7 +59,7 @@ public class JsonBotMessageController {
         }
 
         try {
-            User user = userService.getUserById(Long.valueOf(id)); //check if such user exists
+            var user = userService.getUserById(Long.valueOf(id)); //check if such user exists
             if (user == null){
                 throw new NoSuchElementException();
             }
@@ -80,8 +82,8 @@ public class JsonBotMessageController {
         HttpStatus status = OK;
         List<BotMessage> messages = null;
         try {
-            TimeStampHelper tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
-            User user = userService.getUserById(Long.valueOf(id)); //check if such user exists
+            var tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
+            var user = userService.getUserById(Long.valueOf(id)); //check if such user exists
             if (user == null){
                 throw new NoSuchElementException();
             }
@@ -106,8 +108,8 @@ public class JsonBotMessageController {
         HttpStatus status = OK;
         List<BotMessage> messages = List.of();
         try {
-            TimeStampHelper tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
-            User user = userService.getUserById(Long.valueOf(id)); //check if such user exists
+            var tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
+            var user = userService.getUserById(Long.valueOf(id)); //check if such user exists
 
             if(user == null){
                 throw new NoSuchElementException();

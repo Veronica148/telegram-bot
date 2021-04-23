@@ -3,9 +3,7 @@ package com.app.services;
 import com.app.model.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,7 @@ public class UserServiceFirebaseImpl implements UserService {
 
     @Override
     public User getUserById(long id) throws ExecutionException, InterruptedException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
+        var dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<DocumentSnapshot> future = dbFirestore.collection(TELEGRAM_USER).document(String.valueOf(id)).get();
 
         return future.get().toObject(User.class);
@@ -31,7 +29,7 @@ public class UserServiceFirebaseImpl implements UserService {
 
     @Override
     public Optional<User> getUserByIdOpt(long id) throws ExecutionException, InterruptedException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
+        var dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<DocumentSnapshot> future = dbFirestore.collection(TELEGRAM_USER).document(String.valueOf(id)).get();
         return Optional.ofNullable(future.get().toObject(User.class));
     }
@@ -39,18 +37,17 @@ public class UserServiceFirebaseImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() throws ExecutionException, InterruptedException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
+        var dbFirestore = FirestoreClient.getFirestore();
         List<QueryDocumentSnapshot> documents = dbFirestore.collection(TELEGRAM_USER).get().get().getDocuments();
         List<User> users = documents.stream()
                 .map(document -> new User(Long.valueOf(document.getId()), document.getString("firstName"), document.getString("lastName")))
                 .collect(Collectors.toList());
-        users.stream().forEach(System.out::println);
         return users;
     }
 
     @Override
     public User saveUser(User entity) throws ExecutionException, InterruptedException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
+        var dbFirestore = FirestoreClient.getFirestore();
         dbFirestore.collection(TELEGRAM_USER)
                 .document(String.valueOf(entity.getUserId())).set(entity).get();
         return entity;
@@ -58,8 +55,8 @@ public class UserServiceFirebaseImpl implements UserService {
 
     @Override
     public boolean removeUser(long id) {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection(TELEGRAM_USER).document(String.valueOf(id)).delete();
+        var dbFirestore = FirestoreClient.getFirestore();
+        dbFirestore.collection(TELEGRAM_USER).document(String.valueOf(id)).delete();
         return true;
     }
 }

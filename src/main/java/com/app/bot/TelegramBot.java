@@ -38,7 +38,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        User user = new User();
+        var user = new User();
         user.setUserId(update.getMessage().getFrom().getId());
         user.setFirstName(update.getMessage().getFrom().getFirstName());
         user.setLastName(update.getMessage().getFrom().getLastName());
@@ -48,7 +48,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             e.printStackTrace();
         }
 
-        BotMessage message = new BotMessage();
+        var message = new BotMessage();
         String mesText = update.getMessage().getText();
 
         message.setUser(user);
@@ -58,9 +58,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         message.setSentMessage(respMessage);
         try {
             botMessageService.saveBotMessage(message);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -68,7 +66,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     public synchronized void sendMsg(String chatId, String s) {
-        SendMessage sendMessage = new SendMessage();
+        var sendMessage = new SendMessage();
         sendMessage.enableMarkdown(true);
         sendMessage.setChatId(chatId);
         sendMessage.setText(s);

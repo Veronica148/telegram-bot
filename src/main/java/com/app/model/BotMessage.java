@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Data
 @Builder
 public class BotMessage {
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     String id;
     User user;
     String receivedMessage;

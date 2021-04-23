@@ -17,8 +17,8 @@ public class TimeStampHelper {
 
     public static TimeStampHelper getTimeStampHelperFromIntervals(String startDate, String endDate) throws NumberFormatException{
         try {
-            Timestamp localStartDate = Timestamp.valueOf(START_DATE);
-            Timestamp localEndDate = Timestamp.valueOf(END_DATE);
+            var localStartDate = Timestamp.valueOf(START_DATE);
+            var localEndDate = Timestamp.valueOf(END_DATE);
 
             if (startDate != null && endDate != null) {
                 localStartDate = Timestamp.valueOf(startDate);

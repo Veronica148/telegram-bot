@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 @Service
@@ -15,7 +14,7 @@ public class FirebaseConfig {
 
     @PostConstruct
     private static void init() throws IOException {
-        FileInputStream serviceAccount =
+        var serviceAccount =
                 new FileInputStream("./serviceAccountKey.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()

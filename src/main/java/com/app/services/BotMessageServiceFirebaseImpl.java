@@ -2,16 +2,15 @@ package com.app.services;
 
 import com.app.model.BotMessage;
 import com.app.model.User;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.firebase.cloud.FirestoreClient;
-import javassist.NotFoundException;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
@@ -23,14 +22,13 @@ public class BotMessageServiceFirebaseImpl implements BotMessageService {
 
     @Override
     public List<BotMessage> getAllBotMessages() throws ExecutionException, InterruptedException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-        List<BotMessage> messages = new ArrayList<>();
+        var dbFirestore = FirestoreClient.getFirestore();
+        List<BotMessage> messages;
         List<QueryDocumentSnapshot> documents = dbFirestore.collection(TELEGRAM_MESSAGE).get().get().getDocuments();
 
         messages = documents.stream()
-            .map(document -> getBotMessage(document))
+            .map(this::getBotMessage)
             .collect(Collectors.toList());
-        messages.stream().forEach(System.out::println);
         return messages;
     }
 
@@ -46,7 +44,7 @@ public class BotMessageServiceFirebaseImpl implements BotMessageService {
 //    }
 
     private BotMessage getBotMessage(QueryDocumentSnapshot document) {
-        BotMessage result = BotMessage.builder()
+        return BotMessage.builder()
                 .id(document.getId())
                 .receivedMessage(document.getString("receivedMessage"))
                 .sentMessage(document.getString("sentMessage"))
@@ -57,13 +55,12 @@ public class BotMessageServiceFirebaseImpl implements BotMessageService {
                         .userId(((HashMap<String, Long>) document.getData().get("user")).get("userId"))
                         .build())
                 .build();
-        return result;
     }
 
     @Override
     @SneakyThrows
     public BotMessage saveBotMessage(BotMessage entity) {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
+        var dbFirestore = FirestoreClient.getFirestore();
         if (entity.getId() == null) {
             entity.setId(UUID.randomUUID().toString());
         }
@@ -78,24 +75,21 @@ public class BotMessageServiceFirebaseImpl implements BotMessageService {
     @Override
     public List<BotMessage> saveBotMessages(List<BotMessage> messages) {
         messages.stream()
-                .forEach(message -> saveBotMessage(message));
+                .forEach(this::saveBotMessage);
         return messages;
     }
 
     @Override
     public void removeBotMessages(List<BotMessage> messages) {
         List<String> ids = messages.stream().map(message -> message.getId()).collect(Collectors.toList());
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-        CollectionReference collection = dbFirestore.collection(TELEGRAM_MESSAGE);
+        var dbFirestore = FirestoreClient.getFirestore();
         List<QueryDocumentSnapshot> documents = null;
         try {
             documents = dbFirestore.collection(TELEGRAM_MESSAGE).get().get().getDocuments();
             documents.stream()
                     .filter(document -> ids.contains(document.getId()))
                     .forEach(document -> document.getReference().delete());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
     }
