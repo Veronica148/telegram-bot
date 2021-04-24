@@ -11,5 +11,5 @@ public interface BotMessageService {
     BotMessage saveBotMessage(BotMessage entity) throws ExecutionException, InterruptedException;
     List<BotMessage> saveBotMessages(List<BotMessage> messages) throws ExecutionException, InterruptedException;
     void removeBotMessages(List<BotMessage> messages) throws ExecutionException, InterruptedException;
-    Optional<List<BotMessage>> getAllBotMessagesOpt() throws ExecutionException, InterruptedException ;
+//    Optional<List<BotMessage>> getAllBotMessagesOpt() throws ExecutionException, InterruptedException ;
 }

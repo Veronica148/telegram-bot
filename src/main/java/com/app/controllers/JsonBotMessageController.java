@@ -52,7 +52,7 @@ public class JsonBotMessageController {
     public ResponseEntity<List<BotMessage>> getMessagesForUser(@RequestParam String id, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate){
         List<BotMessage> messages = null;
         try {
-            TimeStampHelper tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
+            var tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
 
             if (userService.getUserById(Long.valueOf(id)) != null) {
                 messages = service.getAllBotMessages().stream()
@@ -73,7 +73,7 @@ public class JsonBotMessageController {
     public ResponseEntity<List<BotMessage>> updateHistoryBetweenDates(@RequestParam String id, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) {
         List<BotMessage> messages = null;
         try {
-            TimeStampHelper tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
+            var tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
 
             if (userService.getUserById(Long.valueOf(id)) != null) {
                 messages = service.getAllBotMessages().stream()
@@ -96,7 +96,7 @@ public class JsonBotMessageController {
     public ResponseEntity<List<BotMessage>> deleteUserHistoryBetweenDates(@RequestParam String id, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) {
         List<BotMessage> messages = List.of();
         try {
-            TimeStampHelper tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
+            var tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
 
             if (userService.getUserById(Long.valueOf(id)) != null) {//check if such user exists
 

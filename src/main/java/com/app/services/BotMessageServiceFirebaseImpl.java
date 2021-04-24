@@ -34,16 +34,16 @@ public class BotMessageServiceFirebaseImpl implements BotMessageService {
         return messages;
     }
 
-    @Override
-    public Optional<List<BotMessage>> getAllBotMessagesOpt() throws ExecutionException, InterruptedException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-        List<QueryDocumentSnapshot> documents = dbFirestore.collection(TELEGRAM_MESSAGE).get().get().getDocuments();
-        List<BotMessage> messages = documents.stream()
-                .map(document -> getBotMessage(document))
-                .collect(Collectors.toList());
-        messages.stream().forEach(System.out::println);
-        return Optional.ofNullable(messages);
-    }
+//    @Override
+//    public Optional<List<BotMessage>> getAllBotMessagesOpt() throws ExecutionException, InterruptedException {
+//        var dbFirestore = FirestoreClient.getFirestore();
+//        List<QueryDocumentSnapshot> documents = dbFirestore.collection(TELEGRAM_MESSAGE).get().get().getDocuments();
+//        List<BotMessage> messages = documents.stream()
+//                .map(document -> getBotMessage(document))
+//                .collect(Collectors.toList());
+//        messages.stream().forEach(System.out::println);
+//        return Optional.ofNullable(messages);
+//    }
 
     private BotMessage getBotMessage(QueryDocumentSnapshot document) {
         return BotMessage.builder()
@@ -83,7 +83,9 @@ public class BotMessageServiceFirebaseImpl implements BotMessageService {
 
     @Override
     public void removeBotMessages(List<BotMessage> messages) {
-        List<String> ids = messages.stream().map(message -> message.getId()).collect(Collectors.toList());
+        List<String> ids = messages.stream()
+                .map(BotMessage::getId)
+                .collect(Collectors.toList());
         var dbFirestore = FirestoreClient.getFirestore();
         List<QueryDocumentSnapshot> documents = null;
         try {

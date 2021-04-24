@@ -30,7 +30,13 @@ and other date's combinations
 
 
 To generate Allure report:
-allure serve allure-results
+#allure serve allure-results
+
+allure serve ./target/allure-results/
+allure generate ./target/allure-results --clean -o ./target/allure-report 
+
+allure open .  - from allure-report  folder
+
 
 For finding processes on the port 8080:
     lsof -n -i4TCP:8080
