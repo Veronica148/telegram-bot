@@ -2,17 +2,16 @@ steps:
   - name: "gcr.io/cloud-builders/mvn"
     args: ["clean", "integration-test", "-DtestSuite=testngUnitTests"]
     waitFor: ['-']
-
-  - name: "gcr.io/cloud-builders/mvn"
-    args: ["clean", "integration-test", "-DtestSuite=testng"]
-    waitFor: ['-']
-
-  - name: "gcr.io/cloud-builders/gcloud"
-    args: ["app", "deploy", "app.standard.yaml"]
-
+#
+#  - name: "gcr.io/cloud-builders/mvn"
+#    args: ["clean", "integration-test", "-DtestSuite=testng"]
+#    waitFor: ['-']
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args: ['-c', './runtests.sh']
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy", "app.standard.yaml"]
 
 timeout: "1600s"
 
