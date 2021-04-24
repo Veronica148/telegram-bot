@@ -2,6 +2,7 @@ package com.app.services;
 
 import com.app.model.BotMessage;
 import com.app.model.User;
+import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.firebase.cloud.FirestoreClient;
 import lombok.SneakyThrows;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -32,16 +34,16 @@ public class BotMessageServiceFirebaseImpl implements BotMessageService {
         return messages;
     }
 
-//    @Override
-//    public Optional<List<BotMessage>> getAllBotMessagesOpt() throws ExecutionException, InterruptedException {
-//        Firestore dbFirestore = FirestoreClient.getFirestore();
-//        List<QueryDocumentSnapshot> documents = dbFirestore.collection(TELEGRAM_MESSAGE).get().get().getDocuments();
-//        List<BotMessage> messages = documents.stream()
-//                .map(document -> getBotMessage(document))
-//                .collect(Collectors.toList());
-//        messages.stream().forEach(System.out::println);
-//        return Optional.ofNullable(messages);
-//    }
+    @Override
+    public Optional<List<BotMessage>> getAllBotMessagesOpt() throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        List<QueryDocumentSnapshot> documents = dbFirestore.collection(TELEGRAM_MESSAGE).get().get().getDocuments();
+        List<BotMessage> messages = documents.stream()
+                .map(document -> getBotMessage(document))
+                .collect(Collectors.toList());
+        messages.stream().forEach(System.out::println);
+        return Optional.ofNullable(messages);
+    }
 
     private BotMessage getBotMessage(QueryDocumentSnapshot document) {
         return BotMessage.builder()

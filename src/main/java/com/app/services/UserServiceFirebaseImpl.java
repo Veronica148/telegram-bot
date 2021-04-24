@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -20,11 +21,14 @@ public class UserServiceFirebaseImpl implements UserService {
     public static final String TELEGRAM_USER = "telegram_user";
 
     @Override
-    public User getUserById(long id) throws ExecutionException, InterruptedException {
+    public User getUserById(long id) throws ExecutionException, InterruptedException, NoSuchElementException {
         var dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<DocumentSnapshot> future = dbFirestore.collection(TELEGRAM_USER).document(String.valueOf(id)).get();
-
-        return future.get().toObject(User.class);
+        User result = future.get().toObject(User.class);
+        if (null == result) {
+            throw new NoSuchElementException();
+        }
+        return result;
     }
 
     @Override

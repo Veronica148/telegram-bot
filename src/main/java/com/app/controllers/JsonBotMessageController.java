@@ -51,82 +51,66 @@ public class JsonBotMessageController {
     @ResponseBody
     public ResponseEntity<List<BotMessage>> getMessagesForUser(@RequestParam String id, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate){
         List<BotMessage> messages = null;
-        TimeStampHelper tsHelper;
         try {
-            tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
-        } catch (NumberFormatException ex) {
-            return new ResponseEntity(BAD_REQUEST);
-        }
+            TimeStampHelper tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
 
-        try {
-            var user = userService.getUserById(Long.valueOf(id)); //check if such user exists
-            if (user == null){
-                throw new NoSuchElementException();
+            if (userService.getUserById(Long.valueOf(id)) != null) {
+                messages = service.getAllBotMessages().stream()
+                        .filter(x -> Objects.equals(x.getUser().getUserId(), Long.valueOf(id)))
+                        .filter(x -> x.getDate().after(tsHelper.getStartDate()) && x.getDate().before(tsHelper.getEndDate()))
+                        .collect(toList());
             }
-
-            messages = service.getAllBotMessages().stream()
-                    .filter(x -> Objects.equals(x.getUser().getUserId(), Long.valueOf(id)))
-                    .filter(x -> x.getDate().after(tsHelper.getStartDate()) && x.getDate().before(tsHelper.getEndDate()))
-                    .collect(toList());
         }catch (NoSuchElementException ex) {
             return new ResponseEntity(NOT_FOUND);
-        }catch (InterruptedException | ExecutionException ex) {
+        }catch (NumberFormatException | InterruptedException | ExecutionException ex) {
             return new ResponseEntity(BAD_REQUEST);
         }
-        return new ResponseEntity<>(messages, OK);
+        return new ResponseEntity(messages, OK);
     }
 
     @GetMapping("/updateHistoryBetweenDates")
     @ResponseBody
     public ResponseEntity<List<BotMessage>> updateHistoryBetweenDates(@RequestParam String id, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) {
-        HttpStatus status = OK;
         List<BotMessage> messages = null;
         try {
-            var tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
-            var user = userService.getUserById(Long.valueOf(id)); //check if such user exists
-            if (user == null){
-                throw new NoSuchElementException();
-            }
+            TimeStampHelper tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
 
-            messages = service.getAllBotMessages().stream()
-                    .filter(x -> Objects.equals(x.getUser().getUserId(), Long.valueOf(id)))
-                    .filter(x -> x.getDate().after(tsHelper.getStartDate()) && x.getDate().before(tsHelper.getEndDate()))
-                    .collect(toList());
-            messages.stream().forEach(x -> x.setReceivedMessage(UPDATE_MESSAGE));
-            service.saveBotMessages(messages);
+            if (userService.getUserById(Long.valueOf(id)) != null) {
+                messages = service.getAllBotMessages().stream()
+                        .filter(x -> Objects.equals(x.getUser().getUserId(), Long.valueOf(id)))
+                        .filter(x -> x.getDate().after(tsHelper.getStartDate()) && x.getDate().before(tsHelper.getEndDate()))
+                        .collect(toList());
+                messages.stream().forEach(x -> x.setReceivedMessage(UPDATE_MESSAGE));
+                service.saveBotMessages(messages);
+            }
         } catch (NumberFormatException | InterruptedException | ExecutionException ex) {
-            status = HttpStatus.BAD_REQUEST;
+            return new ResponseEntity(BAD_REQUEST);
         } catch (NoSuchElementException ex) {
-            status = HttpStatus.NOT_FOUND;
+            return new ResponseEntity(NOT_FOUND);
         }
-        return new ResponseEntity<>(messages, status);
+        return new ResponseEntity(messages, OK);
     }
 
     @GetMapping("/deleteUserHistoryBetweenDates")
     @ResponseBody
     public ResponseEntity<List<BotMessage>> deleteUserHistoryBetweenDates(@RequestParam String id, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) {
-        HttpStatus status = OK;
         List<BotMessage> messages = List.of();
         try {
-            var tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
-            var user = userService.getUserById(Long.valueOf(id)); //check if such user exists
+            TimeStampHelper tsHelper = TimeStampHelper.getTimeStampHelperFromIntervals(startDate, endDate);
 
-            if(user == null){
-                throw new NoSuchElementException();
+            if (userService.getUserById(Long.valueOf(id)) != null) {//check if such user exists
+
+                messages = service.getAllBotMessages().stream()
+                        .filter(x -> Objects.equals(x.getUser().getUserId(), Long.valueOf(id)))
+                        .filter(x -> x.getDate().after(tsHelper.getStartDate()) && x.getDate().before(tsHelper.getEndDate()))
+                        .collect(toList());
+                service.removeBotMessages(messages);
             }
-
-            messages = service.getAllBotMessages().stream()
-                    .filter(x -> Objects.equals(x.getUser().getUserId(), Long.valueOf(id)))
-                    .filter(x -> x.getDate().after(tsHelper.getStartDate()) && x.getDate().before(tsHelper.getEndDate()))
-                    .collect(toList());
-            service.removeBotMessages(messages);
-        } catch (NumberFormatException ex) {
-            status = HttpStatus.BAD_REQUEST;
+        } catch (NumberFormatException | InterruptedException | ExecutionException ex) {
+            return new ResponseEntity(messages, BAD_REQUEST);
         } catch (NoSuchElementException ex) {
-            status = HttpStatus.NOT_FOUND;
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            return new ResponseEntity(messages, NOT_FOUND);
         }
-        return new ResponseEntity<>(messages, status);
+        return new ResponseEntity(messages, OK);
     }
 }
