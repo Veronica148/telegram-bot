@@ -1,7 +1,7 @@
 steps:
-  - name: "gcr.io/cloud-builders/mvn"
-    args: ["clean", "integration-test", "-DtestSuite=testngUnitTests"]
-    waitFor: ['-']
+#  - name: "gcr.io/cloud-builders/mvn"
+#    args: ["clean", "integration-test", "-DtestSuite=testngUnitTests"]
+#    waitFor: ['-']
 #
 #  - name: "gcr.io/cloud-builders/mvn"
 #    args: ["clean", "integration-test", "-DtestSuite=testng"]

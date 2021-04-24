@@ -20,7 +20,7 @@
 		<sonar.projectKey>Veronica148_telegram-bot</sonar.projectKey>
 		<sonar.organization>veronica148</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<testSuite>nontest</testSuite>
+		<testSuite>alltests</testSuite>
 <!--		<sonar.moduleKey>com.example:demo</sonar.moduleKey>-->
 <!--		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>-->
 <!--		<sonar.junit.reportsPath>target/site/jacoco-aggregate</sonar.junit.reportsPath>-->
@@ -179,6 +179,46 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
+					</execution>
+					<execution>
+						<id>check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<phase>verify</phase>
+						<configuration>
+							<rules>
+								<rule>
+									<element>CLASS</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.40</minimum>
+										</limit>
+										<limit>
+											<counter>INSTRUCTION</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.45</minimum>
+										</limit>
+<!--										<limit>-->
+<!--											<counter>BRANCH</counter>-->
+<!--											<value>COVEREDRATIO</value>-->
+<!--											<minimum>0.80</minimum>-->
+<!--										</limit>-->
+
+									</limits>
+									<excludes>
+										<exclude>
+											com.app.model.*
+										</exclude>
+										<exclude>
+											com.app.bot.TelegramBot
+										</exclude>
+									</excludes>
+								</rule>
+							</rules>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
