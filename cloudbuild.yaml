@@ -6,12 +6,19 @@ steps:
 #  - name: "gcr.io/cloud-builders/mvn"
 #    args: ["clean", "integration-test", "-DtestSuite=testng"]
 #    waitFor: ['-']
+    unit_test_reporting_step:
+      title: Generate test reporting
+      image: codefresh/cf-docker-test-reporting
+      working_directory: '${{CF_VOLUME_PATH}}/'
+      environment:
+        - BUCKET_NAME=telegram-bot-baket
+        - CF_STORAGE_INTEGRATION=google
 
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
       - '-c'
-      - sudo apt install allure
+      - apt install allure
 #      - allure serve allure-results
 
   - name: "gcr.io/cloud-builders/gcloud"
