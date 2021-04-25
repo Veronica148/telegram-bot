@@ -68,7 +68,7 @@ public class JsonBotMessageController {
         return new ResponseEntity(messages, OK);
     }
 
-    @GetMapping("/updateHistoryBetweenDates")
+    @GetMapping("/updatehistorybetweendates")
     @ResponseBody
     public ResponseEntity<List<BotMessage>> updateHistoryBetweenDates(@RequestParam String id, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) {
         List<BotMessage> messages = null;
@@ -91,7 +91,7 @@ public class JsonBotMessageController {
         return new ResponseEntity(messages, OK);
     }
 
-    @GetMapping("/deleteUserHistoryBetweenDates")
+    @GetMapping("/deleteuserhistorybetweendates")
     @ResponseBody
     public ResponseEntity<List<BotMessage>> deleteUserHistoryBetweenDates(@RequestParam String id, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) {
         List<BotMessage> messages = List.of();
