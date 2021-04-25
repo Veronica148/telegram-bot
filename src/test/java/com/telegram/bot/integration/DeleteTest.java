@@ -54,7 +54,7 @@ public class DeleteTest extends AbstractTestNGSpringContextTests {
                 .saveBotMessage(new BotMessage(UUID.randomUUID().toString(), user,"lower2","sent2",
                         new Timestamp(currentTime)));
 
-        mockMvc.perform(get("/deleteUserHistoryBetweenDates")
+        mockMvc.perform(get("/deleteuserhistorybetweendates")
                 .param("id",user.getUserId().toString())
                 .param("startDate", String.valueOf(new Timestamp(currentTime - 1)))
                 .param("endDate", String.valueOf(new Timestamp(currentTime + 1000)))
@@ -80,7 +80,7 @@ public class DeleteTest extends AbstractTestNGSpringContextTests {
                 .saveBotMessage(new BotMessage(UUID.randomUUID().toString(), user ,"lower","sent",
                         new Timestamp(currentTime)));
 
-        mockMvc.perform(get("/deleteUserHistoryBetweenDates")
+        mockMvc.perform(get("/deleteuserhistorybetweendates")
                 .param("id","111")
                 .param("startDate", String.valueOf(new Timestamp(currentTime - 1)))
                 .param("endDate", String.valueOf(new Timestamp(currentTime + 1000)))

@@ -59,7 +59,7 @@ public class UpdateTest extends AbstractTestNGSpringContextTests {
                 .saveBotMessage(new BotMessage(UUID.randomUUID().toString(), user,"lower2","sent2",
                         new Timestamp(currentTime)));
 
-        mockMvc.perform(get("/updateHistoryBetweenDates")
+        mockMvc.perform(get("/updatehistorybetweendates")
                 .param("id",user.getUserId().toString())
                 .param("startDate", String.valueOf(new Timestamp(currentTime - 1)))
                 .param("endDate", String.valueOf(new Timestamp(currentTime + 1000)))
@@ -86,7 +86,7 @@ public class UpdateTest extends AbstractTestNGSpringContextTests {
                 .saveBotMessage(new BotMessage(UUID.randomUUID().toString(), user,"lower","sent",
                         new Timestamp(currentTime)));
 
-        mockMvc.perform(get("/updateHistoryBetweenDates")
+        mockMvc.perform(get("/updatehistorybetweendates")
                 .param("id", notExistentId)
                 .param("startDate", String.valueOf(new Timestamp(currentTime - 1)))
                 .param("endDate", String.valueOf(new Timestamp(currentTime + 1000)))
@@ -105,7 +105,7 @@ public class UpdateTest extends AbstractTestNGSpringContextTests {
                 .saveBotMessage(new BotMessage(UUID.randomUUID().toString(), user,"lower","sent",
                         new Timestamp(currentTime)));
 
-        mockMvc.perform(get("/updateHistoryBetweenDates")
+        mockMvc.perform(get("/updatehistorybetweendates")
                 .param("id", user.getUserId().toString())
                 .param("startDate", badDate)
                 .param("endDate", String.valueOf(new Timestamp(currentTime + 1000)))
