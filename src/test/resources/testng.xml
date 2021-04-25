@@ -1,10 +1,8 @@
 <?xml version="1.0" ?>
-<!--        encoding="UTF-8"?>-->
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Test Suite" >
+<suite name="Integration Test Suite">
     <listeners>
         <listener class-name="com.telegram.bot.base.TestListener"/>
-        <listener class-name="com.telegram.bot.base.retry.AnnotationTransformer"/>
     </listeners>
 
     <test name="Integration tests">
@@ -14,9 +12,4 @@
             <class name="com.telegram.bot.integration.UpdateTest"/>
         </classes>
     </test>
-<!--    <test name="Unit tests">-->
-<!--        <classes>-->
-<!--            <class name="com.telegram.bot.unit.BotApiHelperTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
 </suite>

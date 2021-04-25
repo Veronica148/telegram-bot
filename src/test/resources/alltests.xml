@@ -3,7 +3,6 @@
 <suite name="All Test Suite" >
     <listeners>
         <listener class-name="com.telegram.bot.base.TestListener"/>
-        <listener class-name="com.telegram.bot.base.retry.AnnotationTransformer"/>
     </listeners>
 
     <test name="Integration tests">
