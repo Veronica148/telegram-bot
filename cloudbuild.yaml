@@ -17,9 +17,9 @@ steps:
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "app.standard.yaml"]
 
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/telbot', '.']
-    images: ['gcr.io/$PROJECT_ID/telbot']
+#  - name: 'gcr.io/cloud-builders/docker'
+#    args: ['build', '-t', 'gcr.io/$PROJECT_ID/telbot', '.']
+#    images: ['gcr.io/$PROJECT_ID/telbot']
 #
 #  - name: ‘docker/compose:1.19.0’
 #    args: [‘up’, ‘-d’]
