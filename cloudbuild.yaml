@@ -1,28 +1,26 @@
 steps:
-  - name: "gcr.io/cloud-builders/mvn"
-    args: ["clean", "integration-test", "-DtestSuite=testngUnitTests"]
-    waitFor: ['-']
-#
-#  - name: "gcr.io/cloud-builders/mvn"
-#    args: ["clean", "integration-test", "-DtestSuite=testng"]
-#    waitFor: ['-']
-
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - apt install allure
-#      - allure serve allure-results
-
-  - name: "gcr.io/cloud-builders/gcloud"
-    args: ["app", "deploy", "app.standard.yaml"]
 
 #  - name: 'gcr.io/cloud-builders/docker'
 #    args: ['build', '-t', 'gcr.io/$PROJECT_ID/telbot', '.']
 #    images: ['gcr.io/$PROJECT_ID/telbot']
 #
-#  - name: ‘docker/compose:1.19.0’
-#    args: [‘up’, ‘-d’]
+#  - name: "gcr.io/cloud-builders/mvn"
+#    args: ["clean", "integration-test", "-DtestSuite=testngUnitTests"]
+#    waitFor: ['-']
+#
+#  - name: "gcr.io/cloud-builders/mvn"
+#    args: ["clean", "integration-test", "-DtestSuite=testng"]
+#    waitFor: ['-']
+
+#  - name: 'gcr.io/cloud-builders/gcloud'
+#    entrypoint: 'bash'
+#    args:
+#      - '-c'
+#      - apt install allure
+#      - allure serve allure-results
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy", "app.standard.yaml"]
 
 timeout: "1600s"
 
