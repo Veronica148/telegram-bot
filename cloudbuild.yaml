@@ -12,11 +12,15 @@ steps:
 #    args: ["clean", "integration-test", "-DtestSuite=testng"]
 #    waitFor: ['-']
 
-  - name: 'bash'
-    args: ['pwd']
+#  - name: 'bash'
+#    args: ['pwd']
 
   - name: 'bash'
     args: ["ls", "-R"]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['run', '-d', '-p', '4545:80', 'nginx']
+    wait_for: ['latest']
 
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "app.standard.yaml"]
