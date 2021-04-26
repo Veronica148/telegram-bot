@@ -20,8 +20,7 @@
 		<sonar.projectKey>Veronica148_telegram-bot</sonar.projectKey>
 		<sonar.organization>veronica148</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<testSuite>testngUnitTests</testSuite>
-<!--		<testSuite>alltests</testSuite>-->
+		<testSuite>alltests</testSuite>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<aggregate.report.dir>target/site/jacoco/jacoco.xml</aggregate.report.dir>
@@ -114,7 +113,6 @@
 						<!--suppress UnresolvedMavenProperty -->
 						<suiteXmlFile>src/test/resources/${testSuite}.xml</suiteXmlFile>
 					</suiteXmlFiles>
-<!--					<argLine>-Xms512m -Xmx1024m</argLine>-->
 					<systemPropertyVariables>
 						<allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
 					</systemPropertyVariables>
@@ -177,37 +175,37 @@
 						</goals>
 						<phase>verify</phase>
 						<configuration>
-<!--							<rules>-->
-<!--								<rule>-->
-<!--									<element>CLASS</element>-->
-<!--									<limits>-->
+							<rules>
+								<rule>
+									<element>CLASS</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.40</minimum>
+										</limit>
+										<limit>
+											<counter>INSTRUCTION</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.45</minimum>
+										</limit>
 <!--										<limit>-->
-<!--											<counter>LINE</counter>-->
+<!--											<counter>BRANCH</counter>-->
 <!--											<value>COVEREDRATIO</value>-->
-<!--											<minimum>0.04</minimum>-->
+<!--											<minimum>0.80</minimum>-->
 <!--										</limit>-->
-<!--										<limit>-->
-<!--											<counter>INSTRUCTION</counter>-->
-<!--											<value>COVEREDRATIO</value>-->
-<!--											<minimum>0.45</minimum>-->
-<!--										</limit>-->
-<!--&lt;!&ndash;										<limit>&ndash;&gt;-->
-<!--&lt;!&ndash;											<counter>BRANCH</counter>&ndash;&gt;-->
-<!--&lt;!&ndash;											<value>COVEREDRATIO</value>&ndash;&gt;-->
-<!--&lt;!&ndash;											<minimum>0.80</minimum>&ndash;&gt;-->
-<!--&lt;!&ndash;										</limit>&ndash;&gt;-->
 
-<!--									</limits>-->
-<!--									<excludes>-->
-<!--										<exclude>-->
-<!--											com.app.model.*-->
-<!--										</exclude>-->
-<!--										<exclude>-->
-<!--											com.app.bot.TelegramBot-->
-<!--										</exclude>-->
-<!--									</excludes>-->
-<!--								</rule>-->
-<!--							</rules>-->
+									</limits>
+									<excludes>
+										<exclude>
+											com.app.model.*
+										</exclude>
+										<exclude>
+											com.app.bot.TelegramBot
+										</exclude>
+									</excludes>
+								</rule>
+							</rules>
 						</configuration>
 					</execution>
 				</executions>
