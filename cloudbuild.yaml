@@ -12,13 +12,6 @@ steps:
 #    args: ["clean", "integration-test", "-DtestSuite=testng"]
 #    waitFor: ['-']
 
-#  - name: 'gcr.io/cloud-builders/gcloud'
-#    entrypoint: 'bash'
-#    args:
-#      - '-c'
-#      - apt install allure
-#      - allure serve allure-results
-
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "app.standard.yaml"]
 
