@@ -12,6 +12,12 @@ steps:
 #    args: ["clean", "integration-test", "-DtestSuite=testng"]
 #    waitFor: ['-']
 
+  - name: 'bash'
+    args: ['pwd']
+
+  - name: 'bash'
+    args: ['ls']
+
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "app.standard.yaml"]
 
