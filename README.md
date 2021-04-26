@@ -2,8 +2,8 @@
 bot name: verlapun_bot
 
 REST:
-https://telegrambotv1-311221.ey.r.appspot.com/getusers  - returns all users
-https://telegrambotv1-311221.ey.r.appspot.com//getusers/531091708 - returns details of concrete User
+https://telegrambotv1-311221.ey.r.appspot.com/users  - returns all users
+https://telegrambotv1-311221.ey.r.appspot.com/users/531091708 - returns details of concrete User
 
 https://telegrambotv1-311221.ey.r.appspot.com/getmessages  - returns all messages
 https://telegrambotv1-311221.ey.r.appspot.com/getmessages?startDate=2021-04-03 00:00:00&endDate=2021-04-09 10:00:00 - returns all messges from the period
@@ -26,9 +26,8 @@ and other date's combinations
 
 
 To generate Allure report:
-#allure serve allure-results
 allure serve ./target/allure-results/
 allure generate ./target/allure-results --clean -o ./target/allure-report 
-allure open .  - from allure-report  folder
+allure open . 
 
 
