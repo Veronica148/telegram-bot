@@ -20,8 +20,8 @@
 		<sonar.projectKey>Veronica148_telegram-bot</sonar.projectKey>
 		<sonar.organization>veronica148</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<testSuite>testngUnitTests</testSuite>
-<!--		<testSuite>alltests</testSuite>-->
+<!--		<testSuite>testngUnitTests</testSuite>-->
+		<testSuite>alltests</testSuite>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<aggregate.report.dir>target/site/jacoco/jacoco.xml</aggregate.report.dir>
