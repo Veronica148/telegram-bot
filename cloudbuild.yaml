@@ -8,8 +8,17 @@ steps:
 #    args: ["clean", "integration-test", "-DtestSuite=testng"]
 #    waitFor: ['-']
 
+  #  - name: 'bash'
+  #    args: ['pwd']
+
+
+  - name: 'ubuntu'
+    args: ['bash', '-c','ls -ll']
+
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "app.standard.yaml"]
+
+
 
 timeout: "1600s"
 
