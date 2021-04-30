@@ -17,8 +17,8 @@ steps:
     args: ['bash', '-c','tar zxvf openjdk-11.0.1_linux-x64_bin.tar.gz']
 
 
-#  - name: 'bash'
-#    args: ['printenv']
+  - name: 'bash'
+    args: ['ls -ll']
 
 #  - name: 'gcr.io/cloud-builders/wget'
 #    args: ['https://github.com/allure-framework/allure2/releases/download/2.13.9/allure-2.13.9.zip']
@@ -30,8 +30,8 @@ steps:
 #
 
 
-  - name: "gcr.io/cloud-builders/gcloud"
-    args: ["app", "deploy", "app.standard.yaml"]
+#  - name: "gcr.io/cloud-builders/gcloud"
+#    args: ["app", "deploy", "app.standard.yaml"]
 
 
 
