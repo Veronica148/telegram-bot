@@ -12,8 +12,8 @@ steps:
   #    args: ['pwd']
 
 
-  - name: 'bash'
-    args: ['-c','wget https://github.com/allure-framework/allure2/releases/download/2.13.9/allure-2.13.9.zip && unzip allure-2.13.9.zip && allure-2.13.9/bin/allure --version']
+  - name: 'ubuntu'
+    args: ['bash', '-c','wget https://github.com/allure-framework/allure2/releases/download/2.13.9/allure-2.13.9.zip && unzip allure-2.13.9.zip && allure-2.13.9/bin/allure --version']
 
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "app.standard.yaml"]
