@@ -7,7 +7,7 @@ steps:
     args: ['https://github.com/allure-framework/allure2/releases/download/2.13.9/allure-2.13.9.zip']
 
   - name: "gcr.io/cloud-builders/mvn"
-    args: ["clean", "integration-test"]
+    args: ["clean", "integration-test", "-DtestSuite=testngone"]
 
   - name: 'ubuntu'
     args: ['bash', '-c','./allure.sh']
