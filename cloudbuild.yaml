@@ -14,7 +14,7 @@ steps:
     args: ['https://github.com/allure-framework/allure2/releases/download/2.13.9/allure-2.13.9.zip']
 
   - name: 'ubuntu'
-    args: ['bash', '-c','unzip allure-2.13.9.zip && allure-2.13.9/bin/allure --version']
+    args: ['bash', '-c','apt-get install -y unzip && unzip allure-2.13.9.zip && allure-2.13.9/bin/allure --version']
 
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "app.standard.yaml"]
