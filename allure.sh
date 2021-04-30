@@ -7,6 +7,6 @@ cd jdk-11.0.1/bin
 apt-get update
 apt-get install -y unzip
 unzip ../../allure-2.13.9.zip
-allure-2.13.9/bin/allure generate ../../target/allure-results --clean -o ../../target/allure-report
+nohup allure-2.13.9/bin/allure serve ../../target/allure-results/ &
 cd ../../target/allure-report
 ls -ll
