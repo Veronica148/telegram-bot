@@ -18,13 +18,13 @@ steps:
 
 #&& apt install wget
   - name: 'bash'
-    args: ['printenv && java -version']
+    args: ['printenv']
 
   - name: 'gcr.io/cloud-builders/wget'
     args: ['https://github.com/allure-framework/allure2/releases/download/2.13.9/allure-2.13.9.zip']
 
   - name: 'ubuntu'
-    args: ['bash', '-c','apt-get update && apt-get install -y unzip && unzip allure-2.13.9.zip && allure-2.13.9/bin/allure --version && pwd']
+    args: ['bash', '-c','java -version && apt-get update && apt-get install -y unzip && unzip allure-2.13.9.zip && allure-2.13.9/bin/allure --version && pwd']
 
 #  - name: 'gcr.io/cloud-builders/java'
 #
